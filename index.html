@@ -164,14 +164,15 @@
 	<script src="https://www.gstatic.com/firebasejs/5.4.1/firebase.js"></script>
 	<script>
 	  // Initialize Firebase
-	    var config = {
-		  apiKey: "AIzaSyBR6tFVgpEaJpk6IllwGDPUpgeO19ZKnZs",
-		  authDomain: "mvhs-attendance.firebaseapp.com",
-		  databaseURL: "https://mvhs-attendance.firebaseio.com",
-		  projectId: "mvhs-attendance",
-		  storageBucket: "mvhs-attendance.appspot.com",
-	   	  messagingSenderId: "1031314748817"
-	    };
+	  var config = {
+	    apiKey: "AIzaSyBR6tFVgpEaJpk6IllwGDPUpgeO19ZKnZs",
+	    authDomain: "mvhs-attendance.firebaseapp.com",
+	    databaseURL: "https://mvhs-attendance.firebaseio.com",
+	    projectId: "mvhs-attendance",
+	    storageBucket: "mvhs-attendance.appspot.com",
+	    messagingSenderId: "1031314748817"
+	  };
+	  firebase.initializeApp(config);
 	    firebase.initializeApp(config);
 		var dateObject = new Date();
 		function writeUserData(userId, name, email, schoolID, school) {
@@ -192,7 +193,7 @@
 			var school = document.getElementById("school").value;
 			var SID = document.getElementById("schoolID").value;
 			writeUserData(SID, rName, rEmail, SID, school);
-			setTimeout(location.reload.bind(location), 100);
+			setTimeout(location.reload.bind(location), 1500);
 		}
 
 		function recordAttendance(userId){
@@ -217,7 +218,7 @@
 			e.preventDefault();
 			var loginUserID = document.getElementById("ajpat").value;
 			recordAttendance(loginUserID);
-			setTimeout(location.reload.bind(location), 100);
+			setTimeout(location.reload.bind(location), 1500);
 		}
 	</script>
 	
