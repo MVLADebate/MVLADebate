@@ -171,14 +171,17 @@
 	  firebase.initializeApp(config);
 		var dateObject = new Date();
 		function writeUserData(userId, name, email, schoolID, school) {
-		  firebase.database().ref('users/' + userId).set({
-			username: name,
-			email: email,
-			schoolID: schoolID,
-			school: school,
-			attendanceNum: 1,
-			dates: [(dateObject.getMonth() + 1) + '/' + dateObject.getDate() + '/' + dateObject.getFullYear()]
-		  });
+			console.log(userId);
+		  if(userId != "" && name != "" && email != "" && schoolID != "" && school != ""){
+			  firebase.database().ref('users/' + userId).set({
+				username: name,
+				email: email,
+				schoolID: schoolID,
+				school: school,
+				attendanceNum: 1,
+				dates: [(dateObject.getMonth() + 1) + '/' + dateObject.getDate() + '/' + dateObject.getFullYear()]
+			  });
+			}
 		}
 		var registerButton = document.getElementById("register");
 		
@@ -192,17 +195,20 @@
 		}
 
 		function recordAttendance(userId){
-			return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-			var currentAttendance = snapshot.val().attendanceNum;
-			var currentDates = snapshot.val().dates;
-			currentDates.push((dateObject.getMonth() + 1) + '/' + dateObject.getDate() + '/' + dateObject.getFullYear());
-			var updates = {};
-			  updates['/users/' + userId + '/attendanceNum'] = currentAttendance + 1;
-			  updates['/users/' + userId + '/dates'] = currentDates;
+			if (userId != "") {
+				return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+				var currentAttendance = snapshot.val().attendanceNum;
+				var currentDates = snapshot.val().dates;
+				currentDates.push((dateObject.getMonth() + 1) + '/' + dateObject.getDate() + '/' + dateObject.getFullYear());
+				var updates = {};
+				updates['/users/' + userId + '/attendanceNum'] = currentAttendance + 1;
+				updates['/users/' + userId + '/dates'] = currentDates;
 
-			return firebase.database().ref().update(updates);
+				return firebase.database().ref().update(updates);
+				});
+		}
 
-		});
+		
 			
 		}
 		
