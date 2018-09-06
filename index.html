@@ -191,7 +191,9 @@
 			var school = document.getElementById("school").value;
 			var SID = document.getElementById("schoolID").value;
 			writeUserData(SID, rName, rEmail, SID, school);
-			setTimeout(location.reload.bind(location), 500);
+			//console.log(SID);
+			//setTimeout(location.reload.bind(location), 500);
+			return firebase.database().ref('/users/' + 18916).once('value').then(window.location="thanks.html");
 		}
 
 		function recordAttendance(userId){
@@ -218,8 +220,9 @@
 		attendanceButton.onclick = function(e){
 			e.preventDefault();
 			var loginUserID = document.getElementById("ajpat").value;
-			recordAttendance(loginUserID);
-			setTimeout(location.reload.bind(location), 500);
+			recordAttendance(loginUserID).then(window.location = "thanks.html");
+			
+			//setTimeout(location.reload.bind(location), 500);
 		}
 	</script>
 	
