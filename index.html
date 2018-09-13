@@ -193,7 +193,7 @@
 			writeUserData(SID, rName, rEmail, SID, school);
 			//console.log(SID);
 			//setTimeout(location.reload.bind(location), 500);
-			//return firebase.database().ref('/users/' + 18916).once('value').then(window.location="thanks.html");
+			return firebase.database().ref('/users/' + 18916).once('value').then(() => window.location.href = "thanks.html");
 		}
 
 		function recordAttendance(userId){
@@ -220,7 +220,7 @@
 		attendanceButton.onclick = function(e){
 			e.preventDefault();
 			var loginUserID = document.getElementById("ajpat").value;
-			recordAttendance(loginUserID)//.then(window.location = "thanks.html");
+			recordAttendance(loginUserID).then(() => window.location.href = "thanks.html");
 			
 			//setTimeout(location.reload.bind(location), 500);
 		}
